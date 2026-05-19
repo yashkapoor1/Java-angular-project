@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html ng-app="pdfApp" xmlns:th="http://www.thymeleaf.org"   >
+<head>
+    <meta charset="UTF-8">
+    <title >My App</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="../app.js"></script>
+    <link rel="stylesheet" href=../style.css>
+</head>
+<body ng-controller="PdfController">
+
+<div class="wrapper" >
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar">
+        <div class="brand">Press Sewa Portal</div>
+
+        <nav class="nav">
+            <a href="../index.html">Home</a>
+            <a href="../search.html">Search Directory</a>
+            <a href="../static/test.html">Test</a>
+            <a href="../adminltedemo.html">Admin demo</a>
+            <a href="#">Settings</a>
+        </nav>
+    </aside>
+
+
+    <!-- Main -->
+    <div class="main">
+
+        <!-- Navbar -->
+        <header class="navbar">
+            <button onclick="toggleSidebar()" class="toggle">☰</button>
+            <h3>Dashboard</h3>
+            <div><button ng-click="toggleTheme()"></button></div>
+            <div class="profile"></div>
+        </header>
+        <!-- Content -->
+
+            <!-- Cards -->
+            <!--&lt;!&ndash; The child page content will be injected here &ndash;&gt;-->
+        <div th:fragment="content">
+
+        </div>
+<!--            <div class="card">Total Users</div>-->
+<!--            <div class="card">Revenue</div>-->
+<!--            <div class="card">Orders</div>-->
+<!--            <div class="card">Growth</div>-->
+
+<!--            &lt;!&ndash; Table / Panel &ndash;&gt;-->
+<!--            <div class="panel">-->
+<!--                <h4>Recent Activity</h4>-->
+<!--                <div class="box">User logged in</div>-->
+<!--                <div class="box">New order placed</div>-->
+<!--                <div class="box">Report generated</div>-->
+<!--            </div>-->
+
+
+
+
+<!--    <header>-->
+<!--        <h1>Navigation Bar</h1>-->
+<!--    </header>-->
+
+<!--    <main>-->
+<!--        &lt;!&ndash; The child page content will be injected here &ndash;&gt;-->
+<!--        <div th:replace="${content}"></div>-->
+<!--    </main>-->
+
+<!--    <footer>-->
+<!--        <p>© 2026 My Web App</p>-->
+<!--    </footer>-->
+    </div>
+</div>
+<script>
+    function toggleSidebar() {
+      document.getElementById("sidebar").classList.toggle("hide");
+    }
+</script>
+</body>
+</html>
