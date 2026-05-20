@@ -57,3 +57,15 @@ UNLOCK TABLES;
 ALTER TABLE `testdemoapp`.`e_file` 
 ADD COLUMN `Created_Date` DATETIME NOT NULL DEFAULT NOW() AFTER `District`;
 
+
+
+
+ALTER TABLE `testdemoapp`.`e_file` 
+ADD COLUMN `file_path` VARCHAR(255) NULL AFTER `district`,
+ADD COLUMN `file_name` VARCHAR(255) NULL AFTER `file_path`;
+
+ALTER TABLE `testdemoapp`.`e_file` 
+CHANGE COLUMN `file_name` `file_name` VARCHAR(255) NULL DEFAULT NULL AFTER `District`;
+
+
+
