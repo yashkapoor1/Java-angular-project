@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html ng-app="pdfApp">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>PRGI</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="style.css"/>
+    <style>
+        body{
+            font-family: Arial;
+            margin: 20px;
+        }
+        input{
+            width: 300px;
+            padding: 8px;
+        }
+
+        button{
+            padding: 8px 15px;
+        }
+
+        li{
+            margin: 10px 0;
+        }
+
+        iframe{
+            width: 100%;
+            height: 700px;
+            margin-top: 20px;
+        }
+         .loading-mask{
+
+            position: fixed;
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            background: rgba(0,0,0,0.5);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            z-index: 9999;
+        }
+
+        .loader{
+
+            width: 60px;
+            height: 60px;
+
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid blue;
+
+            border-radius: 50%;
+
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+
+    </style>
+</head>
+<body ng-controller="PdfController">
+
+<div class="wrapper">
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar">
+        <div class="brand">Press Sewa Portal</div>
+
+        <nav class="nav">
+            <a href="index.html">Home</a>
+            <a href="search.html">Search Directory</a>
+            <a href="test.html">Test</a>
+            <a href="adminltedemo.html">Admin demo</a>
+            <a href="#">Settings</a>
+        </nav>
+    </aside>
+
+    <!-- Main -->
+    <div class="main">
+
+        <!-- Navbar -->
+        <header class="navbar">
+            <button onclick="toggleSidebar()" class="toggle">☰</button>
+            <h3>Dashboard</h3>
+            <div><button ng-click="toggleTheme()">Toggle Theme</button></div>
+            <div class="profile">Admin</div>
+        </header>
+
+        <!-- Content -->
+        <section class="content">
+
+            <!-- Cards -->
+            <div class="card">Total Users</div>
+            <div class="card">Revenue</div>
+            <div class="card">Orders</div>
+            <div class="card">Growth</div>
+
+            <!-- Table / Panel -->
+            <div class="panel">
+                <h4>Recent Activity</h4>
+                <div class="box">User logged in</div>
+                <div class="box">New order placed</div>
+                <div class="box">Report generated</div>
+            </div>
+            <h1>{{msg}}</h1>
+        </section>
+
+    </div>
+
+</div>
+
+<script>
+    function toggleSidebar() {
+      document.getElementById("sidebar").classList.toggle("hide");
+    }
+
+
+</script>
+
+</body>
+</html>

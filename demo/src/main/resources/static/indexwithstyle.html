@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>File Search System</title>
+    <link rel="stylesheet" href="style.css"/>
+    <style>
+
+        ul.suggestions {
+            border: 1px solid #ccc;
+            max-width: 300px;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            position: absolute;
+            background: white;
+        }
+        ul.suggestions li {
+            padding: 8px;
+            cursor: pointer;
+        }
+        ul.suggestions li:hover {
+            background-color: #eee;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar">
+        <div class="brand">Press Sewa Portal</div>
+
+        <nav class="nav">
+            <a href="index.html">Home</a>
+            <a href="search.html">Search Directory</a>
+            <a href="test.html">Test</a>
+            <a href="adminltedemo.html">Admin demo</a>
+            <a href="#">Settings</a>
+        </nav>
+    </aside>
+
+    <!-- Main -->
+    <div class="main">
+
+        <!-- Navbar -->
+        <header class="navbar">
+            <button onclick="toggleSidebar()" class="toggle">☰</button>
+            <h3>Dashboard</h3>
+            <div class="profile">Admin</div>
+        </header>
+
+        <!-- Content -->
+        <section class="content">
+
+            <h2>File Search</h2>
+
+            <input type="text" id="keyword"
+                   placeholder="Search Diary / Reg / Title / State / District">
+            <ul id="suggestions" class="suggestions"></ul>
+
+            <button onclick="searchData()">Search</button>
+            <a href="/search.html">
+                Directory Search Page
+            </a>
+            <br><br>
+
+            <table border="1" width="100%">
+                <thead>
+                <tr>
+                    <th>Diary No</th>
+                    <th>Reg No</th>
+                    <th>Title</th>
+                    <th>State</th>
+                    <th>District</th>
+                </tr>
+                </thead>
+
+                <tbody id="result"></tbody>
+            </table>
+
+            <script>
+                const input = document.getElementById('keyword');
+                       const suggestions = document.getElementById('suggestions');
+
+                       input.addEventListener('input', function() {
+                           const keyword = this.value;
+                           if (keyword.length === 0) {
+                               suggestions.innerHTML = '';
+                               return;
+                           }
+
+                           fetch(`http://localhost:8085/efile/search?keyword=${encodeURIComponent(keyword)}`)
+                               .then(response => response.json())
+                               .then(data => {
+                                   suggestions.innerHTML = '';
+                                   data.forEach(name => {
+                                       const li = document.createElement('li');
+                                       li.textContent = name;
+                                       li.addEventListener('click', () => {
+                                           input.value = name;
+                                           suggestions.innerHTML = '';
+                                       });
+                                       suggestions.appendChild(li);
+                                   });
+                               });
+                       });
+
+                       // Hide suggestions when clicking outside
+                       document.addEventListener('click', function(event) {
+                           if (event.target !== input) suggestions.innerHTML = '';
+                       });
+                   function searchData() {
+                       var keyword = document.getElementById("keyword").value;
+
+                       fetch("http://localhost:8085/efile/search?keyword=" + keyword)
+                           .then(response => response.json())
+                           .then(data => {
+
+                               var rows = "";
+
+                               data.forEach(item => {
+
+                                   rows += `
+                                       <tr>
+                                           <td>${item.diaryNumber}</td>
+                                           <td>${item.regNo}</td>
+                                           <td>${item.titleName}</td>
+                                           <td>${item.stateName}</td>
+                                           <td>${item.districtName}</td>
+                                       </tr>
+                                   `;
+                               });
+
+                               document.getElementById("result").innerHTML = rows;
+                           });
+
+                   }
+
+            </script>
+
+        </section>
+
+    </div>
+
+</div>
+
+<script>
+    function toggleSidebar() {
+      document.getElementById("sidebar").classList.toggle("hide");
+    }
+</script>
+
+</body>
+</html>
