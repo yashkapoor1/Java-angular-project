@@ -68,8 +68,7 @@ ALTER TABLE `testdemoapp`.`e_file`
 CHANGE COLUMN `file_name` `file_name` VARCHAR(255) NULL DEFAULT NULL AFTER `District`;
 
 
+ALTER TABLE `testdemoapp`.`e_file` 
+ADD COLUMN `state_id` INT NULL AFTER `title_name`,
+ADD COLUMN `district_id` VARCHAR(255) NULL AFTER `state`;
 
---test
-
-
---test2
